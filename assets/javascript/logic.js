@@ -41,7 +41,7 @@ $('#buttons').on('click', '.topic-button', function() {
     var apiKey = 'Xmjj3tQNWDaq5vc3DK3xgquSrhGcMVdY';
     var chosenTopic = $(this).val();
     
-    var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + chosenTopic + '&api_key=' + apiKey + '&limit=10';
+    var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + chosenTopic + '&api_key=' + apiKey + '&limit=10';
 
     $.ajax({url: queryURL, method: 'GET'})
     .done(function(response) {
