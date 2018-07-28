@@ -1,3 +1,16 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #dd8735;
+}
+
+h3 {
+    text-indent: 50px;
+}
+
+h6 {
+    text-indent: 10px;
+}
+
 h1 {
     text-align: center;
 }
@@ -7,6 +20,28 @@ button {
     
 }
 
+.container {
+    background-color: #b92717;
+    color: #379292;
+}
 .col-md-1 {
     text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.topic-button {
+    margin: 5px 15px 5px 15px;
+    padding: 3px 10px 3px 10px;
+    color: #b92717;
+}
+
+.displayedGif {
+    margin: 0 10px 10px 10px;
+}
+.input {
+    background-color: whitesmoke;
 }

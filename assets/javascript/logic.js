@@ -14,11 +14,10 @@ function getButton(topic) {
     var button = $('<button>');
     var buttonDiv = $('<div>');
 
-    button.addClass('topic-button');
+    button.addClass('topic-button btn-success rounded');
     button.attr('data-topic', topic);
     button.text(topic);
 
-    buttonDiv.addClass('col-md-1');
     buttonDiv.append(button);
     
     return buttonDiv;
@@ -37,16 +36,15 @@ $('#buttons').on('click', '.topic-button', function() {
                 
         for (var i = 0; i < response.data.length; i++) {
             var gifDiv = $('<div>');
-            var ratingsInP = $('<p>').text('Rating: ' + response.data[i].rating);
+            var ratingsInP = $('<h6>').text('Rating: ' + response.data[i].rating);
             var gifImage = $('<img>');
                         
             gifImage.attr('src', response.data[i].images.fixed_height_still.url);
             gifImage.attr('data-still', response.data[i].images.fixed_height_still.url);
             gifImage.attr('data-animate', response.data[i].images.fixed_height.url);
             gifImage.attr('data-state', 'still');
-            gifImage.addClass('displayedGif');
+            gifImage.addClass('displayedGif rounded');
 
-            gifDiv.addClass('col-md-4')
             gifDiv.append(ratingsInP);
             gifDiv.append(gifImage);
 
