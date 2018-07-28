@@ -1,6 +1,6 @@
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: #dd8735;
+    background-color: #6fd084;
 }
 
 h3 {
@@ -21,8 +21,8 @@ button {
 }
 
 .container {
-    background-color: #b92717;
-    color: #379292;
+    background-color: #379292;
+
 }
 .col-md-1 {
     text-align: center;
@@ -36,7 +36,7 @@ button {
 .topic-button {
     margin: 5px 15px 5px 15px;
     padding: 3px 10px 3px 10px;
-    color: #b92717;
+    
 }
 
 .displayedGif {

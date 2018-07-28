@@ -14,7 +14,7 @@ function getButton(topic) {
     var button = $('<button>');
     var buttonDiv = $('<div>');
 
-    button.addClass('topic-button btn-success rounded');
+    button.addClass('topic-button btn-dark rounded');
     button.attr('data-topic', topic);
     button.text(topic);
 
