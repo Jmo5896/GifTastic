@@ -27,7 +27,7 @@ $('#buttons').on('click', '.topic-button', function() {
     
     $('#gifsGoHere').empty();
 
-        var apiKey = config.MY_KEY;
+        var apiKey = 'Xmjj3tQNWDaq5vc3DK3xgquSrhGcMVdY';
     var chosenTopic = $(this).data('topic'); 
     var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + chosenTopic + '&api_key=' + apiKey + '&limit=12'; //for github pages switched http to https
 
