@@ -13,8 +13,11 @@ Getting Started:
     
     To Use App:
         1. clone repository or click the link: https://jmo5896.github.io/GifTastic/
+        ![](./assets/images/enter-category.gif)
         2. enter the category you want to look for in the search bar then click the "add" button
+        ![](./assets/images/click-button.gif)
         3. To see the top 12 memes of the category you just added, click the button with said category on it.
+        ![](./assets/images/refresh-page.gif)
         4. refreshing the page will reset the available buttons to the defaults (funny, fail, cat).
 
 
