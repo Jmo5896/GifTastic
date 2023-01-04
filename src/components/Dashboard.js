@@ -67,7 +67,7 @@ export default function Dashboard() {
     if (loading) {
       fetchData();
     }
-  }, [topic, loading]);
+  }, [topic, offset, loading]);
 
   const addCat = (e) => {
     const currentCat = [...categories];
