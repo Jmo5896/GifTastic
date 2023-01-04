@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import downloadIcon from "bootstrap-icons/icons/box-arrow-down.svg";
+import axios from "axios";
+import fileDownload from "js-file-download";
 
 export default function Gif({ gifObj, title, original }) {
   const [active, setActive] = useState(false);
+
+  const handleDownload = async (url, filename) => {
+    const response = await axios.get(url, {
+      responseType: "blob",
+    });
+    fileDownload(response.data, filename);
+  };
+
   return (
     <>
       <img
@@ -13,15 +23,16 @@ export default function Gif({ gifObj, title, original }) {
       />
       <h5>
         {title}{" "}
-        <a
+        <img
+          style={{ cursor: "pointer" }}
           className="click"
-          href={original}
-          target="_blank"
-          download={`${title.replaceAll(" ", "_")}.gif`}
-          rel="noopener noreferrer"
-        >
-          <img src={downloadIcon} width={25} alt={`download ${title} gif`} />
-        </a>
+          src={downloadIcon}
+          onClick={(e) =>
+            handleDownload(original, `${title.replaceAll(" ", "_")}.gif`)
+          }
+          width={25}
+          alt={`download ${title} gif`}
+        />
       </h5>
     </>
   );

@@ -59,7 +59,7 @@ export default function Dashboard() {
           // rating: obj.rating,
         };
       });
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setGifs(cleanArr);
       setLoading(false);
     };
@@ -73,6 +73,7 @@ export default function Dashboard() {
     const currentCat = [...categories];
     if (entry && !currentCat.includes(entry.toLowerCase())) {
       currentCat.push(entry.toLowerCase());
+      localStorage.setItem("categories", JSON.stringify(currentCat));
       setCatergories(currentCat);
       setTopic(entry.toLowerCase());
       setOffset(0);
@@ -105,8 +106,9 @@ export default function Dashboard() {
           <Col md={12} className="glass">
             <h1>Gif-Tastic Search</h1>
             <h3>
-              Enter a category in the search bar to create a button. Click the
-              button to pull up 12 gif's of the given category.
+              Either click on a category or enter in a new catergory. use Next
+              button to pull the next see next page of Gifs. Did you find one
+              you like? Download it by clicking the "download" icon.
             </h3>
           </Col>
           {/* <Col md={3} className="glass"> */}
