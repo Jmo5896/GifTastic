@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import downloadIcon from "bootstrap-icons/icons/box-arrow-down.svg";
 
-export default function Gif({ gifObj, title, rating }) {
+export default function Gif({ gifObj, title, original }) {
   const [active, setActive] = useState(false);
   return (
     <>
@@ -10,7 +11,18 @@ export default function Gif({ gifObj, title, rating }) {
         alt={title}
         onClick={(e) => setActive(!active)}
       />
-      <h5>{title}</h5>
+      <h5>
+        {title}{" "}
+        <a
+          className="click"
+          href={original}
+          target="_blank"
+          download={`${title.replaceAll(" ", "_")}.gif`}
+          rel="noopener noreferrer"
+        >
+          <img src={downloadIcon} width={25} alt={`download ${title} gif`} />
+        </a>
+      </h5>
     </>
   );
 }

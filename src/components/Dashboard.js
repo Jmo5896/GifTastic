@@ -18,18 +18,44 @@ export default function Dashboard() {
   const [gifs, setGifs] = useState([]);
   const [offset, setOffset] = useState(0);
 
+  const variants = [
+    "primary",
+    "secondary",
+    "success",
+    "warning",
+    "danger",
+    "info",
+    "light",
+    "dark",
+    "outline-primary",
+    "outline-secondary",
+    "outline-success",
+    "outline-warning",
+    "outline-danger",
+    "outline-info",
+    "outline-light",
+    "outline-dark",
+  ];
+
+  const randomVariant = () => {
+    const len = variants.length;
+    const randomIndex = Math.floor(Math.random() * len);
+    return variants[randomIndex];
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const api_key = "RiqVTeIzu1wtDQ4YXNuzhL6LchN4lxhA";
       const response = await API.getGifs(topic, api_key, 4, offset);
       const cleanArr = response.data.data.map((obj) => {
         return {
-          original: obj.images.original.url,
+          original: obj.images.original.url.split("?")[0],
           display: {
-            url: obj.images.fixed_height.url,
-            still: obj.images.fixed_height_still.url,
+            url: obj.images.fixed_height.url.split("?")[0],
+            still: obj.images.fixed_height_still.url.split("?")[0],
           },
           title: obj.title,
+          id: obj.id,
           // rating: obj.rating,
         };
       });
@@ -86,7 +112,7 @@ export default function Dashboard() {
           {/* <Col md={3} className="glass"> */}
           <Col md={3}>
             <Row>
-              <Col sm={12} className="click">
+              <Col sm={12} className="click mb-3">
                 <input
                   type="text"
                   name="addCategory"
@@ -98,10 +124,10 @@ export default function Dashboard() {
                 </Button>
               </Col>
               {categories.map((cat, i) => (
-                <Col key={i} md={4}>
+                <Col key={i} md={4} className="mx-auto d-grid">
                   <Button
                     className="click"
-                    variant="secondary"
+                    variant={randomVariant()}
                     data-value={cat}
                     onClick={selectCat}
                   >
@@ -114,7 +140,7 @@ export default function Dashboard() {
           {/* <Col md={8} className="glass inner-scroll"> */}
           <Col md={9}>
             <Row>
-              <ButtonGroup sm={12}>
+              <ButtonGroup sm={12} className="mb-3">
                 {offset > 0 && (
                   <Button
                     variant="outline-secondary"
@@ -135,12 +161,12 @@ export default function Dashboard() {
                   </Button>
                 )}
               </ButtonGroup>
-              {gifs.map((obj, i) => (
-                <Col sm={6} key={i} className="text-center">
+              {gifs.map((obj) => (
+                <Col sm={6} key={obj.id} className="text-center">
                   <Gif
                     gifObj={obj.display}
                     title={obj.title}
-                    rating={obj.rating}
+                    original={obj.original}
                   />
                 </Col>
               ))}
