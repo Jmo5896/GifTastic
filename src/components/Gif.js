@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 
-export default function Gif({ gifObj }) {
+export default function Gif({ gifObj, title, rating }) {
   const [active, setActive] = useState(false);
   return (
     <>
       <img
-        className="click"
+        className="click rounded"
         src={active ? gifObj.url : gifObj.still}
-        alt={gifObj.title}
+        alt={title}
         onClick={(e) => setActive(!active)}
       />
-      <h5>
-        {gifObj.title} | Rating: {gifObj.rating}
-      </h5>
+      <h5>{title}</h5>
     </>
   );
 }

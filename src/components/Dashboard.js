@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row, Container, Button } from "react-bootstrap";
+import { Col, Row, Container, Button, ButtonGroup } from "react-bootstrap";
 
 import Gif from "./Gif";
 import API from "../services";
@@ -16,20 +16,24 @@ export default function Dashboard() {
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
   const [gifs, setGifs] = useState([]);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const api_key = "Xmjj3tQNWDaq5vc3DK3xgquSrhGcMVdY";
-      const response = await API.getGifs(topic, api_key, 12);
+      const api_key = "RiqVTeIzu1wtDQ4YXNuzhL6LchN4lxhA";
+      const response = await API.getGifs(topic, api_key, 4, offset);
       const cleanArr = response.data.data.map((obj) => {
         return {
-          url: obj.images.original.url,
-          still: obj.images.original_still.url,
+          original: obj.images.original.url,
+          display: {
+            url: obj.images.fixed_height.url,
+            still: obj.images.fixed_height_still.url,
+          },
           title: obj.title,
-          rating: obj.rating,
+          // rating: obj.rating,
         };
       });
-      // console.log(response.data.data);
+      console.log(response.data.data);
       setGifs(cleanArr);
       setLoading(false);
     };
@@ -45,6 +49,7 @@ export default function Dashboard() {
       currentCat.push(entry.toLowerCase());
       setCatergories(currentCat);
       setTopic(entry.toLowerCase());
+      setOffset(0);
       setLoading(true);
     }
   };
@@ -52,6 +57,18 @@ export default function Dashboard() {
   const selectCat = (e) => {
     const val = e.target.dataset.value;
     setTopic(val.toLowerCase());
+    setOffset(0);
+    setLoading(true);
+  };
+
+  const handleNextClick = (e) => {
+    // 4999 is max value from docs
+    setOffset(offset + 4 < 4999 ? offset + 4 : 4999);
+    setLoading(true);
+  };
+
+  const handlePreviousClick = (e) => {
+    setOffset(offset - 4 > 0 ? offset - 4 : 0);
     setLoading(true);
   };
 
@@ -66,7 +83,8 @@ export default function Dashboard() {
               button to pull up 12 gif's of the given category.
             </h3>
           </Col>
-          <Col md={3} className="glass">
+          {/* <Col md={3} className="glass"> */}
+          <Col md={3}>
             <Row>
               <Col sm={12} className="click">
                 <input
@@ -93,11 +111,37 @@ export default function Dashboard() {
               ))}
             </Row>
           </Col>
-          <Col md={8} className="glass">
+          {/* <Col md={8} className="glass inner-scroll"> */}
+          <Col md={9}>
             <Row>
+              <ButtonGroup sm={12}>
+                {offset > 0 && (
+                  <Button
+                    variant="outline-secondary"
+                    className="click"
+                    onClick={handlePreviousClick}
+                  >
+                    Previous
+                  </Button>
+                )}
+
+                {topic && (
+                  <Button
+                    variant="outline-secondary"
+                    className="click"
+                    onClick={handleNextClick}
+                  >
+                    Next
+                  </Button>
+                )}
+              </ButtonGroup>
               {gifs.map((obj, i) => (
-                <Col sm={6} key={i}>
-                  <Gif gifObj={obj} />
+                <Col sm={6} key={i} className="text-center">
+                  <Gif
+                    gifObj={obj.display}
+                    title={obj.title}
+                    rating={obj.rating}
+                  />
                 </Col>
               ))}
             </Row>
